@@ -1,4 +1,4 @@
-// package containerization
+package containerization
 
 class Docker implements Serializable {
   def script
