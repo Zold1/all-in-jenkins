@@ -5,6 +5,9 @@ class Docker implements Serializable {
   
   Docker(script) {
     this.script = script
+    script.sh "sudo yum update -y && sudo yum install -y docker"
+    script.sh "sudo systemctl start docker"
+    script.sh "sudo usermod -aG docker jenkins"
   }
   
   def buildDockerImage(String imageName) {
