@@ -8,6 +8,12 @@ class Docker implements Serializable {
     /*script.sh "sudo yum update -y && sudo yum install -y docker"
     script.sh "sudo systemctl start docker"
     script.sh "sudo usermod -aG docker jenkins"*/
+    
+  }
+  
+  def buildDockerImage(String imageName) {
+    script.echo "building the docker image..."
+    //script.sh "docker build -t $imageName ."
     script.sh """
     if command -v apt >/dev/null; then
       echo "apt is used here"
@@ -17,11 +23,6 @@ class Docker implements Serializable {
       echo "I have no Idea what im doing here"
     fi
     """
-  }
-  
-  def buildDockerImage(String imageName) {
-    script.echo "building the docker image..."
-    //script.sh "docker build -t $imageName ."
   }
   
   def dockerLogin() {
