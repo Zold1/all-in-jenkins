@@ -10,19 +10,28 @@ class Docker implements Serializable {
     script.sh "sudo usermod -aG docker jenkins"*/
     
   }
+
+  def readFile(String fileName) {
+    File file = new File(fileName)
+    StringBuilder sb = new StringBuilder()
+    try {
+      BufferedReader br = new BufferedReader(new FileReader(file))
+      String line;
+      while ((line = br.readLine()) != null) {
+        sb.append(line)
+        sb.append("\n")
+      }
+      br.close()
+    } catch (IOException e) {
+      e.printStackTrace()
+    }
+    return sb.toString()
+  }
   
   def buildDockerImage(String imageName) {
     script.echo "building the docker image..."
     //script.sh "docker build -t $imageName ."
-    script.sh """
-    if command -v apt >/dev/null; then
-      echo "apt is used here"
-    elif command -v yum >/dev/null; then
-      echo "yum is used here"
-    else
-      echo "I have no Idea what im doing here"
-    fi
-    """
+    script.sh readFile("scripts.sh")
   }
   
   def dockerLogin() {
@@ -33,5 +42,7 @@ class Docker implements Serializable {
   
   def dockerPush(String $imageName) {
     script.sh "docker push $imageName"
+
+    // Read text from a file.
   }
 }
