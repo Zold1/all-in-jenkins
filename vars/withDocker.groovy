@@ -1,7 +1,7 @@
 import Docker
 
-def call() {
-  def docker = new Docker(this, Map config)
+def call(Map config) {
+  def docker = new Docker(Map config)
   docker.build()
   docker.login()
   docker.push(imageName)
