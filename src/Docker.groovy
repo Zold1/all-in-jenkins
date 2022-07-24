@@ -1,6 +1,7 @@
 class Docker implements Serializable {
   def script
-  def config
+  Map config
+  //def imageName
   
   Docker(script, Map config) {
     this.script = script
