@@ -1,4 +1,4 @@
-import Docker 
+import containers.Docker
 
 def call(String imageName) {
     /*def docker = new Docker(this)

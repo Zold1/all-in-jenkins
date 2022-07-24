@@ -1,3 +1,5 @@
+package containers
+
 class Docker implements Serializable {
   def script
   
