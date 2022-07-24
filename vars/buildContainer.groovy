@@ -1,7 +1,8 @@
 import Docker 
 
 def call(String imageName) {
-    def docker = new Docker(this)
+    /*def docker = new Docker(this)
     docker.build()
-    docker.login()
+    docker.login()*/
+    return new Docker(this).buildDockerImage(imageName)
 }
