@@ -5,5 +5,5 @@ def call(Map config) {
   docker.build()
   docker.login()
   docker.push(imageName)*/
-  echo config.imageName
+  sh "echo ${config.imageName}"
 }
