@@ -5,5 +5,6 @@ def call(Map config) {
   docker.build()
   docker.login()
   docker.push(imageName)*/
-  sh "echo ${config.imageName}"
+  sh "echo Hello world"
+  sh "echo ${config}"
 }
