@@ -1,8 +1,10 @@
+#!/usr/bin/env groovy
+
 import Docker
 
 def call(String imageName) {
-    /*def docker = new Docker(this)
-    docker.build()
-    docker.login()*/
-    return new Docker(this).dockerLogin()
+  def docker = new Docker(this)
+  docker.build(imageName)
+  docker.login()
+  docker.push(imageName)
 }
