@@ -5,10 +5,10 @@ def call(String imageName) {
     docker.build()
     docker.login()*/
     //return new Docker(this).buildDockerImage(imageName)
-    script.echo "building the docker image..."
-    script.withCredentials([script.usernamePassword(credentialsId: 'docker-account', usernameVariable: USER, passwordVariable: PASS)]) {
-      script.sh "docker build -t $imageName ."
-      script.sh "echo $script.PASS | docker login -u $script.USER --password-stdin"
-      script.sh "docker push $imageName"
+    echo "building the docker image..."
+    withCredentials([usernamePassword(credentialsId: 'docker-account', usernameVariable: USER, passwordVariable: PASS)]) {
+      sh "docker build -t $imageName ."
+      sh "echo $PASS | docker login -u $USER --password-stdin"
+      sh "docker push $imageName"
     }
 }
