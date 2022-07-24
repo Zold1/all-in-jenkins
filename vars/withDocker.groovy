@@ -1,10 +1,8 @@
 import Docker
 
-def call(Map config) {
-  /*def docker = new Docker(imageName)
-  docker.build()
+def call(String imageName) {
+  def docker = new Docker(imageName)
+  docker.build(imageName)
   docker.login()
-  docker.push(imageName)*/
-  sh "echo Hello world"
-  sh "echo ${config}"
+  docker.push(imageName)
 }

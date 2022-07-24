@@ -1,15 +1,11 @@
 class Docker implements Serializable {
   def script
-  //Map config
-  String imageName
   
-  Docker(script, String imageName) {
+  Docker(script) {
     this.script = script
-    this.config = config
-    this.imageName = imageName
   }
   
-  def build() {
+  def build(String imageName) {
     script.echo "building the docker image"
     script.sh "docker build -t ${imageName} ."
   }
@@ -23,6 +19,6 @@ class Docker implements Serializable {
   
   def push(String imageName) {
     script.echo "pushing the docker image"
-    script.sh "docker push $imageName"
+    script.sh "docker push ${imageName}"
   }
 }
