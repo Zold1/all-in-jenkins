@@ -1,24 +1,26 @@
 class Docker implements Serializable {
   def script
+  def config
   
-  Docker(script) {
+  Docker(script, Map config) {
     this.script = script
+    this.config = config
   }
   
-  def build(String imageName) {
-    // echo hello world
-    
-    script.sh "docker build -t $imageName ."
+  def build() {
+    script.echo "building the docker image"
+    script.sh "docker build -t ${config.imageName} ."
   }
   
   def login() {
     script.echo "logging to docker..."
-    script.withCredentials([script.usernamePassword(credentialsId: 'docker-account', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-      script.sh "echo $script.PASS | docker login -u $script.USER --password-stdin"
+    script.withCredentials([script.usernamePassword(credentialsId: 'docker-account', usernameVariable: 'username', passwordVariable: 'password')]) {
+      script.sh "echo $script.password | docker login -u $script.username --password-stdin"
     }
   }
   
   def push(String imageName) {
+    script.echo "pushing the docker image"
     script.sh "docker push $imageName"
   }
 }
