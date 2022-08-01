@@ -7,7 +7,7 @@ class Docker implements Serializable {
   
   def build(String imageName) {
     script.echo "building the docker image"
-    script.sh "docker build -t ${imageName} ."
+    script.sh "docker build -t ${imageName} /var/jenkins_home/workspace/forex/fxcollect"
   }
   
   def login() {
